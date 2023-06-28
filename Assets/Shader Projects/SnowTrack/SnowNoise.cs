@@ -23,7 +23,7 @@ public class SnowNoise : MonoBehaviour
     {
         snowFallMaterial.SetFloat("_FlakeAmount", FlakeAmount);
         snowFallMaterial.SetFloat("_FlakeOpacity", FlakeOpacity);
-        var snow = (RenderTexture)meshRenderer.material.GetTexture("_Track");
+        var snow = (RenderTexture)meshRenderer.material.GetTexture("_Track"); // snow track ²ÄÖÊ
         var tmp = RenderTexture.GetTemporary(snow.width, snow.height, 0, RenderTextureFormat.ARGBFloat);
         Graphics.Blit(snow, tmp, snowFallMaterial);
         Graphics.Blit(tmp, snow);

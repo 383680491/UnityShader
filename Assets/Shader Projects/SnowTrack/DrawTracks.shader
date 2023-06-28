@@ -42,6 +42,7 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                // 纹理本身有过平铺和偏移，则输入的模型UV坐标变换到与纹理的平铺和偏移匹配的空间以获取正确的纹理颜色
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
