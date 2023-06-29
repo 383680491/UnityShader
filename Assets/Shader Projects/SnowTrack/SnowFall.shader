@@ -45,7 +45,9 @@ Shader "Hidden/SnowFall"
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
                 return o;
             }
-
+            // _MainTex是前面DrawTrack生成的红色轨迹贴图，col越红则产生的雪痕迹越明显，为了实现雪痕迹逐渐消失的效果，需要红色颜色逐渐变淡至消失(为0)
+            // 而雪迹消融也不能完全以时间的长度来判断，比如时间越长消散的越快，效果也会假，故不能直接使用color减去 time*threshode。
+            // 最理想的是时间慢一点的也会提前随机消散，稀疏的雪花点效果的算法如下
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);

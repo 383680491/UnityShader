@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//通过随机数减去主纹理的颜色值,在屏幕上生成雪花效果
 public class SnowNoise : MonoBehaviour
 {
     public Shader SnowFallShader;

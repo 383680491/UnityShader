@@ -37,8 +37,10 @@ public class WheelTracks : MonoBehaviour
     {
         for (int i = 0; i < Wheels.Length; i++)
         {
+            // 可以拿到碰撞对象的UV信息
             if (Physics.Raycast(Wheels[i].position, Vector3.down, out hit, 1f, layerMask))
             {
+                //拿到的是纹理UV
                 drawMateral.SetVector("_Coordinate", new Vector4(hit.textureCoord.x, hit.textureCoord.y, 0, 0));
                 // 获得一个临时 获取一个临时RenderTexture,和trackTexture大小一致
                 var tempTex = RenderTexture.GetTemporary(trackTexture.width, trackTexture.height, 0, RenderTextureFormat.ARGBFloat);

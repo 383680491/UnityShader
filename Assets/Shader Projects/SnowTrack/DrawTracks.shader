@@ -1,3 +1,4 @@
+  // 基于传入的uv坐标在绘制轨迹，一般基于RenderTexture拿到轨迹贴图
   Shader "Unlit/DrawTracks"
 {
     Properties
@@ -5,7 +6,9 @@
         _MainTex ("Texture", 2D) = "white" {}
         _Coordinate("Coordinate", Vector) = (0, 0, 0, 0)
         _Color("Draw Color", Color) = (1, 0, 0, 0)
+        //绘制范围
         _Size("Size", Range(1, 500)) = 200
+        //绘制强度
         _Strength("Strength", Range(0, 1)) = 0.1
     }
     SubShader
@@ -50,6 +53,7 @@
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
+                // 这段代码的功能是划线，离传入的坐标uv越近，则线段的颜色就越深
                 float draw = pow(saturate(1 - distance(i.uv, _Coordinate.xy)), 500 / _Size);
                 fixed4 drawCol = _Color * (draw * _Strength);
                 return saturate(col + drawCol);
